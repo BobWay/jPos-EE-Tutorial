@@ -1,0 +1,5 @@
+<qbean name='qtest' class='org.jpos.qtest.QTest' logger='Q2'>
+	<classpath>
+		<url>http://us.jpos.org/examples/qtest-1.0.0.jar</url>
+	</classpath>
+</qbean>
