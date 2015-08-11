@@ -1,14 +1,17 @@
 package org.jpos.qtest;
 
+import org.jpos.core.Configurable;
+import org.jpos.core.Configuration;
 import org.jpos.iso.ISOUtil;
 import org.jpos.q2.Q2;
 import org.jpos.q2.QBean;
 import org.jpos.util.Log;
 
-public class QTest implements QTestMBean, Runnable {
+public class QTest implements QTestMBean, Runnable, Configurable {
     volatile int state;
     long tickInterval = 1000;
     Log log;
+    boolean debug;
 
     public QTest () {
         super();
@@ -44,10 +47,17 @@ public class QTest implements QTestMBean, Runnable {
     public int getState () {
         return state;
     }
+    public void setConfiguration (Configuration cfg) {
+        debug = cfg.getBoolean("debug", true);
+    }
     public String getStateAsString () {
         return state >= 0 ? stateString[state] : "Unknown"; 
     }
     private boolean running() {
         return state == QBean.STARTING || state == QBean.STARTED;
+    }
+    private void log (String message) {
+        if (debug)
+            log (message);
     }
 }
