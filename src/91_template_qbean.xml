@@ -1,0 +1,3 @@
+<qbean name='script' class='org.jpos.q2.qbean.BSH' logger='Q2'><![CDATA[ 
+	log.info ("Hello Again jPOS!");
+]]></qbean>
