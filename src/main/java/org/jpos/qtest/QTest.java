@@ -5,7 +5,7 @@ import org.jpos.q2.Q2;
 import org.jpos.q2.QBean;
 import org.jpos.util.Log;
 
-public class QTest implements QBean, Runnable {
+public class QTest implements QTestMBean, Runnable {
     volatile int state;
     long tickInterval = 1000;
     Log log;
