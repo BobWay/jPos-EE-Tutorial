@@ -5,13 +5,18 @@ import org.jpos.core.Configuration;
 import org.jpos.iso.ISOUtil;
 import org.jpos.q2.Q2;
 import org.jpos.q2.QBean;
+import org.jpos.q2.QPersist;
 import org.jpos.util.Log;
+import org.jdom.Element;
 
-public class QTest implements QTestMBean, Runnable, Configurable {
+public class QTest implements QTestMBean, Runnable, Configurable, QPersist {
     volatile int state;
     long tickInterval = 1000;
     Log log;
     boolean debug;
+    boolean modified = false;
+    Q2 server;
+    Element e;
 
     public QTest () {
         super();
@@ -59,5 +64,28 @@ public class QTest implements QTestMBean, Runnable, Configurable {
     private void log (String message) {
         if (debug)
             log (message);
+    }
+    public void setLogger (String loggerName) {
+        log = Log.getLog (loggerName, getClass().getName());
+        setModified (true);
+    }
+    public void setRealm (String realm) {
+    if (log != null)
+        log.setRealm (realm);
+    }
+    public void setModified (boolean modified) {
+        this.modified = modified;
+    }
+    public void setServer (Q2 server) {
+        this.server = server;
+    }
+    public boolean isModified () {
+        return this.modified;
+    }
+    public void setPersist (Element e) {
+        this.e = e;
+    }
+    public Element getPersist () {
+        return this.e;
     }
 }
