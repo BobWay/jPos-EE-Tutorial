@@ -1,1 +1,3 @@
-<qbean name='qtest' class='org.jpos.qtest.QTest' />
+<qbean name='qtest' class='org.jpos.qtest.QTest'>
+	<attr name="tickInterval" type="java.lang.Long">5000</attr>
+</qbean>
